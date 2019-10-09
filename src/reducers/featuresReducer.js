@@ -1,5 +1,5 @@
-import { types } from "@babel/core";
-import { BUY_ITEM } from '../actions/actionTypes';
+import * as types  from '../actions/actionTypes';
+
 
 const initialState = {
     additionalPrice: 0,
@@ -18,31 +18,33 @@ const initialState = {
     ]
   };
 
-  export const featuresReducer = (state = initialState, action) => {
-      switch (action.type) {
-        default:
-            return {
-              ...state,
-              car: {
-                ...state.car,
-                features: [...state.car.features, action.payload].filter(
-                  (item, index, self) => {
-                    return self.indexOf(item) === index;
-                  }
-                ),
-                price: state.car.price + action.payload.price
+  export function featuresReducer(state = initialState, action) {
+    switch (action.type) {
+      default:
+        return state;
+      case types.BUY_ITEM:
+        return {
+          ...state,
+          car: {
+            ...state.car,
+            features: [...state.car.features, action.payload].filter(
+              (item, index, self) => {
+                return self.indexOf(item) === index;
               }
-            };
-              case types.REMOVE_ITEM:
-              return {
-                ...state,
-                car: {
-                  ...state.car,
-                  features: state.car.features.filter(
-                    item => item.id !== action.payload.id
-                  ),
-                  price: state.car.price - action.payload.price
-                }
-              };
-      }
+            ),
+            price: state.car.price + action.payload.price
+          }
+        };
+      case types.REMOVE_ITEM:
+        return {
+          ...state,
+          car: {
+            ...state.car,
+            features: state.car.features.filter(
+              item => item.id !== action.payload.id
+            ),
+            price: state.car.price - action.payload.price
+          }
+        };
+    }
   }

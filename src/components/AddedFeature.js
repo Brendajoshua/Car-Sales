@@ -1,5 +1,5 @@
 import React from 'react';
-import { removeItem } from '../actions/actionsCreators';
+import { removeItem } from '../actions/actionCreators';
 
 const AddedFeature = props => {
   return (
