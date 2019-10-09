@@ -27,7 +27,7 @@ const initialState = {
                       price: state.car.price + action.payload.price
                   }
               };
-              case'REMOVE_FEATURE';
+              case'REMOVE_FEATURE':
               return {
                   ...state,
                   car: {
